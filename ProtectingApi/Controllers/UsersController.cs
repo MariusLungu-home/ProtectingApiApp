@@ -11,7 +11,7 @@ namespace ProtectingApi.Controllers
     {
         // GET: api/<UsersController>
         [HttpGet]
-        [ResponseCache(Duration = 1, Location = ResponseCacheLocation.Any, NoStore = false)]
+        //[ResponseCache(Duration = 1, Location = ResponseCacheLocation.Any, NoStore = false)]
         public IEnumerable<string> Get()
         {
             return new string[] { Random.Shared.Next(1, 101).ToString() };
@@ -19,9 +19,11 @@ namespace ProtectingApi.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
+        //[ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any, NoStore = false)]
+
         public string Get(int id)
         {
-            return "value";
+            return $"Random number: {Random.Shared.Next(1, 101)} for id {id}";
         }
 
         // POST api/<UsersController>
