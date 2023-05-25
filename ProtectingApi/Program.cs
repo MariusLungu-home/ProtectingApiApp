@@ -20,8 +20,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseResponseCaching();
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.UseIpRateLimiting();
+
 app.Run();
