@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MonitoringApi.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,9 +11,10 @@ namespace ProtectingApi.Controllers
     {
         // GET: api/<UsersController>
         [HttpGet]
+        [ResponseCache(Duration = 1, Location = ResponseCacheLocation.Any, NoStore = false)]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { Random.Shared.Next(1, 101).ToString() };
         }
 
         // GET api/<UsersController>/5
@@ -24,8 +26,16 @@ namespace ProtectingApi.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] UserModel value)
         {
+            if (ModelState.IsValid)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT api/<UsersController>/5
